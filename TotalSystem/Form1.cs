@@ -30,7 +30,8 @@ namespace TotalSystem
             public string url;
         }
         int version_major = 1;
-        int version_minor = 1;
+        int version_minor = 11
+            ;
         string version_date = "21SEP18";
         bool nightmode = false;//true turns on night mode
         public Form1()
@@ -215,8 +216,10 @@ namespace TotalSystem
         {
             if(!nightmode)
             {
-                this.BackColor = toolStrip1.BackColor = Form.DefaultBackColor;
+                this.BackColor = Form.DefaultBackColor;
                 this.ForeColor = button3.ForeColor = Form.DefaultForeColor;
+                textBox1.BackColor = textBox2.BackColor = textBox3.BackColor = textBox4.BackColor = toolStrip1.BackColor = Color.White;
+                textBox1.ForeColor = textBox2.ForeColor = textBox3.ForeColor = textBox4.ForeColor = Color.Black;
 
                 nightmode = !nightmode;
             }
@@ -224,7 +227,10 @@ namespace TotalSystem
             {
                 this.BackColor = toolStrip1.BackColor = button3.ForeColor = Color.Black;
                 this.ForeColor = Color.LightGray;
-                
+                textBox1.BackColor = textBox2.BackColor = textBox3.BackColor = textBox4.BackColor = Color.Black;
+                textBox1.ForeColor = textBox2.ForeColor = textBox3.ForeColor = textBox4.ForeColor = Color.White;
+
+
                 nightmode = !nightmode;
             }
         }
