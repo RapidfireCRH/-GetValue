@@ -32,6 +32,7 @@ namespace TotalSystem
         int version_major = 1;
         int version_minor = 1;
         string version_date = "21SEP18";
+        bool nightmode = false;//true turns on night mode
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace TotalSystem
             toolStripLabel1.Text = "";
             settings_handle(settings.open);
             label5.Text += version_major + "." + version_minor + "-" + version_date;
+
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
@@ -171,15 +173,20 @@ namespace TotalSystem
         {
             if (state == settings.open)
             {
-
-                ActiveForm.Size = ActiveForm.MaximumSize = ActiveForm.MinimumSize = new Size(599, 239);
+                if (this.FormBorderStyle == FormBorderStyle.Sizable)
+                    this.Size = this.MaximumSize = this.MinimumSize = new Size(599, 239);
+                else
+                    this.Size = this.MaximumSize = this.MinimumSize = new Size(599, 200);
                 button3.Location = new Point(504, 172);
                 textBox1.Enabled = textBox3.Enabled = textBox4.Enabled = checkBox1.Enabled = true;
                 button3.Text = "<Settings ";
             }
             else
             {
-                ActiveForm.Size = ActiveForm.MaximumSize = ActiveForm.MinimumSize = new Size(251, 239);
+                if (this.FormBorderStyle == FormBorderStyle.Sizable)
+                    this.Size = this.MaximumSize = this.MinimumSize = new Size(251, 239);
+                else
+                    this.Size = this.MaximumSize = this.MinimumSize = new Size(251, 200);
                 button3.Location = new Point(152, 172);
                 textBox1.Enabled = textBox3.Enabled = textBox4.Enabled = checkBox1.Enabled = false;
                 button3.Text = " Settings>";
@@ -202,6 +209,36 @@ namespace TotalSystem
                 timer1.Interval = 10000;
             }
             button1_Click(sender, e);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if(!nightmode)
+            {
+                this.BackColor = toolStrip1.BackColor = Form.DefaultBackColor;
+                this.ForeColor = button3.ForeColor = Form.DefaultForeColor;
+
+                nightmode = !nightmode;
+            }
+            else
+            {
+                this.BackColor = toolStrip1.BackColor = button3.ForeColor = Color.Black;
+                this.ForeColor = Color.LightGray;
+                
+                nightmode = !nightmode;
+            }
+        }
+
+        private void Form1_Leave(object sender, EventArgs e)
+        {
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            settings_handle((this.Size.Width == new Size(599, 0).Width ? settings.open : settings.closed));
+        }
+
+        private void Form1_Enter(object sender, EventArgs e)
+        {
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            settings_handle((this.Size.Width == new Size(599, 0).Width ? settings.open : settings.closed));
         }
     }
 }
