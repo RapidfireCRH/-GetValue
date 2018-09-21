@@ -29,6 +29,9 @@ namespace TotalSystem
             public long value;
             public string url;
         }
+        int version_major = 1;
+        int version_minor = 1;
+        string date = "21SEP18";
         public Form1()
         {
             InitializeComponent();
