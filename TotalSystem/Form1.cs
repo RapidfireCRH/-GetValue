@@ -31,7 +31,7 @@ namespace TotalSystem
         }
         int version_major = 1;
         int version_minor = 1;
-        string date = "21SEP18";
+        string version_date = "21SEP18";
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +45,7 @@ namespace TotalSystem
             button2.Enabled = false;
             toolStripLabel1.Text = "";
             settings_handle(settings.open);
+            label5.Text += version_major + "." + version_minor + "-" + version_date;
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
